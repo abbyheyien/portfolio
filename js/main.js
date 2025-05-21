@@ -1,7 +1,7 @@
-//開啟動畫
+// 預載動畫
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
-  if (!preloader) return; // 預防找不到元素出錯
+  if (!preloader) return;
 
   preloader.style.opacity = "0";
   preloader.style.transition = "opacity 0.5s ease";
@@ -11,18 +11,37 @@ window.addEventListener("load", () => {
   }, 500);
 });
 
-//按鈕
+// 中英切換
+const langToggleBtn = document.getElementById("langToggle");
+let currentLang = "zh"; // 預設中文
+
+langToggleBtn.addEventListener("click", () => {
+  const zhElems = document.querySelectorAll('[data-lang="zh"]');
+  const enElems = document.querySelectorAll('[data-lang="en"]');
+  if (currentLang === "zh") {
+    zhElems.forEach((el) => (el.style.display = "none"));
+    enElems.forEach((el) => (el.style.display = ""));
+    langToggleBtn.textContent = "中";
+    currentLang = "en";
+  } else {
+    zhElems.forEach((el) => (el.style.display = ""));
+    enElems.forEach((el) => (el.style.display = "none"));
+    langToggleBtn.textContent = "EN";
+    currentLang = "zh";
+  }
+});
+
+// 回頂端按鈕
 document.addEventListener("DOMContentLoaded", () => {
   const backToTopBtn = document.getElementById("backToTop");
-
   backToTopBtn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
-//導覽列
+// 導覽列滾動效果
 window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar-glass");
+  const navbar = document.querySelector(".navbar");
   if (window.scrollY > 50) {
     navbar.classList.add("scrolled");
   } else {
@@ -30,7 +49,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-//打字機
+// 打字機效果
 document.addEventListener("DOMContentLoaded", function () {
   const text = "Hello! Welcome to my website💗";
   const target = document.getElementById("typewriter");
@@ -40,16 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if (index < text.length) {
       target.textContent += text.charAt(index);
       index++;
-      setTimeout(type, 100); // 打字速度
+      setTimeout(type, 100);
     } else {
-      // 打完後停一下，然後清空再重新開始
       setTimeout(() => {
         target.textContent = "";
         index = 0;
         type();
-      }, 2000); // 等 2 秒後重新打字
+      }, 2000);
     }
   }
 
-  type(); // 啟動打字
+  type();
 });

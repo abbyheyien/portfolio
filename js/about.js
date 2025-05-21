@@ -31,3 +31,17 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 // 頁面載入時檢查一次
 revealOnScroll();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const langToggle = document.getElementById("langToggle");
+  let currentLang = "tw"; // 預設中文
+
+  langToggle.addEventListener("click", () => {
+    currentLang = currentLang === "tw" ? "en" : "tw";
+    langToggle.textContent = currentLang === "tw" ? "EN" : "中";
+
+    document.querySelectorAll("[data-lang-tw]").forEach((el) => {
+      el.textContent = el.getAttribute(`data-lang-${currentLang}`);
+    });
+  });
+});

@@ -335,12 +335,40 @@ p {
     font-size: 0.8rem;
   }
 }
-@media (max-width: 1024px) {
-  .timeline-card p,
-  .timeline-card h4 {
-    font-size: 0.9rem;
+/* 桌機以上使用 Grid 等寬排列 */
+@media (min-width: 1025px) {
+  .timeline-horizontal {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 四欄 */
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden; /* 禁止橫向滾動 */
   }
   .timeline-card {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%; /* 撐滿欄寬 */
+  }
+}
+/* 平板與手機維持橫向滑動 */
+@media (max-width: 1024px) {
+  .timeline-horizontal {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
     padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .timeline-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 240px;
+    max-width: 300px;
   }
 }
